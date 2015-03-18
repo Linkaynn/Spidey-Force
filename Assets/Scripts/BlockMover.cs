@@ -17,15 +17,7 @@ public class BlockMover : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		if (startPosition == null || endPosition == null) {
-			startPosition = transform.position;
-			endPosition = transform.position;
-		}
-
 		transform.position = startPosition;
-
-
 	}
 	
 	// Update is called once per frame

@@ -11,8 +11,9 @@ public class Player : MonoBehaviour
 	public LayerMask groundMask; //Capa del suelo para saber sobre qué queremos saltar
 
 	public GameObject life;
-	public AudioSource audio;
-	public AudioClip[] clips;
+	public ParticleSystem particles;
+
+	private Sounds sound;
 
     private RaycastHit hit; 
     private Vector3 move;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameController = GameController.instance;
+		sound = Sounds.instance;
         animator = GetComponent<Animator>();
     }
 
@@ -66,10 +68,7 @@ public class Player : MonoBehaviour
         {
             animator.SetTrigger("isJumping");
             rigidbody2D.AddForce(new Vector2(0, force));  
-			if (!audio.isPlaying){
-				audio.clip = clips[2];
-				audio.Play();
-			}
+			sound.playSound("jump");
 
         }
 
@@ -78,10 +77,7 @@ public class Player : MonoBehaviour
 			gameController.ChangeLifes(false);
 			rigidbody2D.AddForce(new Vector2(0, force));
 			CheckIfGameOver();
-			if (!audio.isPlaying){
-				audio.clip = clips[3];
-				audio.Play();
-			}
+			sound.playSound("hit");
 		}
     }
 
@@ -93,10 +89,7 @@ public class Player : MonoBehaviour
         {
             gameController.score += 10;
             Destroy(other.gameObject);
-			if (!audio.isPlaying || audio.clip != clips[0]){
-				audio.clip = clips[0];
-				audio.Play();
-			}
+			sound.playSound("coin");
         }
         /***VIDAS***/
         else if (other.gameObject.tag == "Life")
@@ -109,10 +102,7 @@ public class Player : MonoBehaviour
                 gameController.ChangeLifes(true);          
             }
 
-			if (!audio.isPlaying){
-				audio.clip = clips[4];
-				audio.Play();
-			}
+			sound.playSound("life");
         }
         /***PUERTA***/
         else if (other.gameObject.tag == "Door")
@@ -124,38 +114,45 @@ public class Player : MonoBehaviour
     /***ENEMIGOS***/
     void OnCollisionEnter2D(Collision2D other)
     {       
-        if (other.gameObject.tag == "Enemy")
-        {
+        if (other.gameObject.tag == "Enemy"){
+
+			// Physic calculation of the relative velocity of the hitter against the hitted (Do not touch!)
             Vector2 vFinal = other.rigidbody.mass * other.relativeVelocity / (rigidbody2D.mass + other.rigidbody.mass);
 
-            if (vFinal.y < -0.5)
-            {
-				int numero=Random.Range(0, 101);
+            if (vFinal.y < -0.5){
 
-				if(numero>=40 && numero<=75)
-				{
-					Instantiate (life, other.transform.position, other.transform.rotation);
-				}
+				instantiateLife(life, other);
+				instantiateParticles(particles, other);
+
                 Destroy(other.gameObject);
+
                 rigidbody2D.AddForce(new Vector2(0, -vFinal.y * 100));
-				if (!audio.isPlaying){
-					audio.clip = clips[1];
-					audio.Play();
-				}
+
+				sound.playSound("enemiedie");
             }
-            else
-            {
+            else{
+
                 Enemy o = other.gameObject.GetComponent<Enemy>();
                 o.ChangeDirection();
                 gameController.ChangeLifes(false);
                 CheckIfGameOver();
-				if (!audio.isPlaying){
-					audio.clip = clips[3];
-					audio.Play();
-				}
+				sound.playSound("hit");
             }
         }   
     }
+
+	void instantiateLife(GameObject life, Collision2D other){
+		int numero = Random.Range(0, 101);
+		
+		if(numero >= 40 && numero <= 75)
+		{
+			Instantiate (life, other.transform.position, other.transform.rotation);
+		}
+	}
+
+	void instantiateParticles(ParticleSystem particles, Collision2D other){
+		Instantiate (particles, other.transform.position, new Quaternion(0,1356,0,0));
+	}
 
     void CheckIfGameOver()
     {

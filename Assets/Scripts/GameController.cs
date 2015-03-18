@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	public GameObject scoreGUI; //Texto con la puntuación
+	private GameObject scoreGUI; //Texto con la puntuación
     public int score; //Puntuación (Monedas)
 
     public int nlifes = 3; //Número de vidas iniciales del jugador 
@@ -37,11 +37,9 @@ public class GameController : MonoBehaviour {
 	void Update () 
     {
 		if (scoreGUI == null)
-			scoreGUI = GameObject.FindWithTag("Score"); 
+			scoreGUI = GameObject.FindWithTag("Score");
 
-		if (lifes[0] == null)
-			lifes = GameObject.FindWithTag("GuiLife").GetComponentsInChildren<GUITexture>();
-
+		//Llevar a otro script
 		if (Input.GetKey(KeyCode.Q))
 			Application.Quit();
 
@@ -54,8 +52,9 @@ public class GameController : MonoBehaviour {
 			}
 			score = 0;
 		}
+		//
 
-        scoreGUI.guiText.guiText.text = "" + score;
+        scoreGUI.guiText.text = "" + score;
 	}
 
     public void ChangeLifes(bool a)
@@ -81,4 +80,8 @@ public class GameController : MonoBehaviour {
         level++;
         Application.LoadLevel(level);
     }
+
+	public int getScore(){
+		return score;
+	}
 }
