@@ -3,22 +3,28 @@ using System.Collections;
 
 public class Messages : MonoBehaviour {
 
-	private GameController score; //Texto con la puntuación
+	private GameController gameController; //Texto con la puntuación
 
 	private ArrayList arrayOfMessages;
 	private int nMessages = 0;
 
 	public GameObject message;
 
-	private int after, before;
+	private int sAfter, sBefore;
+	private bool scoreUp;
+
+	private int lAfter, lBefore;
+	private bool life;
 
 	// Use this for initialization
 	void Start () {
-		score = GameController.instance;
+		gameController = GameController.instance;
 		arrayOfMessages = new ArrayList ();
 		message.guiText.fontSize = 10;
-		after = 0;
-		before = 0;
+		sAfter = 0;
+		sBefore = 0;
+		lAfter = 3;
+		lBefore = 3;
 	
 	}
 	
@@ -27,12 +33,38 @@ public class Messages : MonoBehaviour {
 
 		moveUp ();
 
-		before = score.getScore();
-		if (after - before < 0) {
+		sBefore = gameController.getScore();
+
+		if (sAfter != sBefore)
+			scoreUp = true;
+
+		lBefore = gameController.nlifes;
+
+		if (lAfter != lBefore)
+			life = true;
+
+		if (sAfter != sBefore || lAfter != lBefore) {
 			float random = Random.Range(0.01f,0.1f);
-			message.guiText.text = "" + (before - after);
+
+			if (scoreUp){
+				message.guiText.text = "" + (sBefore - sAfter);
+				message.guiText.color = Color.black;
+				sAfter = sBefore;
+				scoreUp = false;
+			}
+
+			if (life){
+				if (lBefore - lAfter < 0)
+					message.guiText.text = "" + (lBefore - lAfter);
+				else
+					message.guiText.text = "+" + (lBefore - lAfter);
+				message.guiText.color = Color.red;
+				lAfter = lBefore;
+				life = false;
+			}
+
 			GameObject aux = Instantiate(message, new Vector3(0.48f + random, 0.62f + random, 0f), this.transform.rotation) as GameObject;
-			after = before;
+
 			arrayOfMessages.Add(aux);
 			nMessages++;
 		}

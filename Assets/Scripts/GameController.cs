@@ -7,13 +7,12 @@ public class GameController : MonoBehaviour {
     public int score; //Puntuación (Monedas)
 
     public int nlifes = 3; //Número de vidas iniciales del jugador 
-	private GUITexture[] lifes; //Texturas para representar las vidas del jugador
+	public GUITexture[] lifes; //Texturas para representar las vidas del jugador
 
     public static GameController instance = null;
     public int level;
 
-    void Awake()
-    {
+    void Awake(){
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -38,21 +37,8 @@ public class GameController : MonoBehaviour {
     {
 		if (scoreGUI == null)
 			scoreGUI = GameObject.FindWithTag("Score");
-
-		//Llevar a otro script
-		if (Input.GetKey(KeyCode.Q))
-			Application.Quit();
-
-		if (Input.GetKey (KeyCode.R)) {
-			level = -1;
-			ChangeLevel();
-			nlifes = 3;
-			for (int i = 0; i < lifes.Length; i++){
-				lifes[i].enabled = true;
-			}
-			score = 0;
-		}
-		//
+		scoreGUI.guiText.fontSize = 40;
+		scoreGUI.guiText.color = Color.black;
 
         scoreGUI.guiText.text = "" + score;
 	}

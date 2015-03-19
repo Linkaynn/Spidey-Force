@@ -126,14 +126,18 @@ public class Player : MonoBehaviour
 
                 Destroy(other.gameObject);
 
+				giveScoreForKill(other);
+
                 rigidbody2D.AddForce(new Vector2(0, -vFinal.y * 100));
 
 				sound.playSound("enemiedie");
             }
             else{
 
-                Enemy o = other.gameObject.GetComponent<Enemy>();
-                o.ChangeDirection();
+				if (other.gameObject.name != "RedEnemy"){
+	                Enemy o = other.gameObject.GetComponent<Enemy>();
+	                o.ChangeDirection();
+				}
                 gameController.ChangeLifes(false);
                 CheckIfGameOver();
 				sound.playSound("hit");
@@ -152,6 +156,19 @@ public class Player : MonoBehaviour
 
 	void instantiateParticles(ParticleSystem particles, Collision2D other){
 		Instantiate (particles, other.transform.position, new Quaternion(0,1356,0,0));
+	}
+
+	void giveScoreForKill(Collision2D other){
+		switch (other.gameObject.name) {
+		case "RedEnemy":
+			gameController.score += 25;
+			break;
+		case "GreenEnemy":
+			gameController.score += 15;
+			break;
+		default:
+			break;
+		}
 	}
 
     void CheckIfGameOver()
