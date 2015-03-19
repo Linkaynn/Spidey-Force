@@ -14,6 +14,7 @@ public class Sounds : MonoBehaviour {
 	 * 2: Player jump (jump)
 	 * 3: Enemy hit player (hit)
 	 * 4: Take Life (life)
+	 * 5: Throw knife (knife)
 	 */
 
 	// Use this for initialization
@@ -39,7 +40,7 @@ public class Sounds : MonoBehaviour {
 		}
 	}
 
-	public void playSource(string clip, AudioSource audioSource){
+	private void playSource(string clip, AudioSource audioSource){
 		switch (clip){
 		case "coin":
 			audioSource.clip = clips[0];
@@ -59,6 +60,10 @@ public class Sounds : MonoBehaviour {
 			break;
 		case "life":
 			audioSource.clip = clips[4];
+			audioSource.Play();
+			break;
+		case "knife":
+			audioSource.clip = clips[5];
 			audioSource.Play();
 			break;
 		default:

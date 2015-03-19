@@ -17,7 +17,7 @@ public class KeyBoard : MonoBehaviour {
 		
 		if (Input.GetKey (KeyCode.R)) {
 			instance.level = -1;
-			instance.ChangeLevel();
+			instance.changeLevel();
 			instance.nlifes = 3;
 			for (int i = 0; i < instance.lifes.Length; i++){
 				instance.lifes[i].enabled = true;

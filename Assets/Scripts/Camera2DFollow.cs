@@ -3,6 +3,9 @@ using UnityEngine;
     public class Camera2DFollow : MonoBehaviour
     {
 
+
+		public static Camera2DFollow instance = null;
+
         public Transform target;
         public float damping = 1;
         public float lookAheadFactor = 3;
@@ -14,6 +17,8 @@ using UnityEngine;
         private Vector3 currentVelocity;
         private Vector3 lookAheadPos;
 
+		private bool inBoss = false;
+
         // Use this for initialization
         private void Start()
         {
@@ -21,11 +26,16 @@ using UnityEngine;
             offsetZ = (transform.position - target.position).z;
             transform.parent = null;
 			target = GameObject.FindWithTag("Player").transform;
+			if (instance == null)
+				instance = this;
         }
 
         // Update is called once per frame
         private void Update()
         {
+			if (inBoss)
+				return;
+			
 			if (target == null)
 				target = GameObject.FindWithTag("Player").transform;
             // only update lookahead pos if accelerating or changed direction
@@ -49,4 +59,14 @@ using UnityEngine;
 
             lastTargetPosition = target.position;
         }
+
+		public void positionation(Vector2 position){
+			transform.position = position;
+			inBoss = true;
+		}
+
+		public void finishBoss(){
+			inBoss = false;
+		}
+
     }

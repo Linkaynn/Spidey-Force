@@ -10,7 +10,8 @@ public class Player : MonoBehaviour
     public float checkRadius = 0.07f;
 	public LayerMask groundMask; //Capa del suelo para saber sobre qué queremos saltar
 
-	public GameObject life;
+	public GameObject[] pickups = new GameObject[2];
+	public GameObject sword;
 	public ParticleSystem particles;
 
 	private Sounds sound;
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
         /***SALTO***/
         onGround = Physics2D.OverlapCircle(checkGround.position, checkRadius, groundMask);
 
-        if (Input.GetKey(KeyCode.W) && onGround)
+        if (((Input.GetAxis("Vertical") > 0) || Input.GetKey(KeyCode.Space)) && onGround)
         {
             animator.SetTrigger("isJumping");
             rigidbody2D.AddForce(new Vector2(0, force));  
@@ -72,9 +73,30 @@ public class Player : MonoBehaviour
 
         }
 
+		/***ESPADA***/
+
+		if (Input.GetKeyDown (KeyCode.E) && gameController.nSwords > 0) {
+
+			GameObject gSword;
+			Quaternion actual = transform.rotation;
+
+			if (actual.y == 0){
+				gSword = Instantiate(sword, (transform.position + new Vector3(1,0,0)), transform.rotation) as GameObject;
+				gSword.rigidbody2D.AddForce(new Vector2(450,0));
+			}else{
+				gSword = Instantiate(sword, (transform.position + new Vector3(-1,0,0)), transform.rotation) as GameObject;
+				gSword.rigidbody2D.AddForce(new Vector2(-450,0));
+			}
+
+			gameController.changeSwords(false);
+
+			sound.playSound("knife");
+
+		}
+
 		/***CAIDA***/
 		if (rigidbody2D.velocity.y < -18.5) {
-			gameController.ChangeLifes(false);
+			gameController.changeLifes(false);
 			rigidbody2D.AddForce(new Vector2(0, force));
 			CheckIfGameOver();
 			sound.playSound("hit");
@@ -99,11 +121,17 @@ public class Player : MonoBehaviour
 
             if (gameController.nlifes < 3) //Sólo incrementamos las vidas si tenemos menos de 3
             {
-                gameController.ChangeLifes(true);          
+                gameController.changeLifes(true);          
             }
 
 			sound.playSound("life");
-        }
+        } else if (other.gameObject.tag == "Sword"){
+			Destroy(other.gameObject);
+
+			if (gameController.nSwords < 5){
+				gameController.changeSwords(true);
+			}
+		}
         /***PUERTA***/
         else if (other.gameObject.tag == "Door")
         {
@@ -121,7 +149,7 @@ public class Player : MonoBehaviour
 
             if (vFinal.y < -0.5){
 
-				instantiateLife(life, other);
+				instantiatePickup(other);
 				instantiateParticles(particles, other);
 
                 Destroy(other.gameObject);
@@ -138,27 +166,34 @@ public class Player : MonoBehaviour
 	                Enemy o = other.gameObject.GetComponent<Enemy>();
 	                o.ChangeDirection();
 				}
-                gameController.ChangeLifes(false);
+                gameController.changeLifes(false);
                 CheckIfGameOver();
 				sound.playSound("hit");
             }
         }   
     }
 
-	void instantiateLife(GameObject life, Collision2D other){
+	/* PICKUPS
+	 * 0: Life
+	 * 1: Sword
+	 */
+
+	private void instantiatePickup(Collision2D other){
 		int numero = Random.Range(0, 101);
 		
-		if(numero >= 40 && numero <= 75)
+		if(numero >= 0 && numero <= 35)
 		{
-			Instantiate (life, other.transform.position, other.transform.rotation);
+			Instantiate (pickups[0], other.transform.position, other.transform.rotation);
+		} else if (numero > 35 && numero <= 60){
+			Instantiate (pickups[1], other.transform.position, other.transform.rotation);
 		}
 	}
 
-	void instantiateParticles(ParticleSystem particles, Collision2D other){
+	private void instantiateParticles(ParticleSystem particles, Collision2D other){
 		Instantiate (particles, other.transform.position, new Quaternion(0,1356,0,0));
 	}
 
-	void giveScoreForKill(Collision2D other){
+	private void giveScoreForKill(Collision2D other){
 		switch (other.gameObject.name) {
 		case "RedEnemy":
 			gameController.score += 25;
@@ -181,7 +216,7 @@ public class Player : MonoBehaviour
 
     void ChangeLevel()
     {
-        gameController.ChangeLevel();
+        gameController.changeLevel();
     }
 
 }
