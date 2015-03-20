@@ -5,9 +5,13 @@ public class Sounds : MonoBehaviour {
 
 	public static Sounds instance = null;
 
-	public new AudioSource[] audio = new AudioSource[4];
+	public AudioSource mainAudio; //AudioSource player of the base music
+
+	public AudioClip[] baseClips = new AudioClip[2]; //Vector of base clips
+
+	public new AudioSource[] audio = new AudioSource[4]; //Vector of AudioSource player of the short clips
 	
-	public AudioClip[] clips = new AudioClip[5];
+	public AudioClip[] clips = new AudioClip[5]; //Vector of short clips
 	/* Clips
 	 * 0: Coin (coin)
 	 * 1: Enemy die (enemiedie)
@@ -23,9 +27,13 @@ public class Sounds : MonoBehaviour {
 		if (audio == null) {
 			Debug.Log("ERROR: Expect AudioSource in Sounds.cs script.");
 		}
+
 		instance = this;
+
+		mainAudio = gameObject.GetComponent<AudioSource> ();
 	}
 
+	/**SHORT CLIPS**/
 	// I decide do a switch to do more clean the code of Player.cs script because is a but more larger that this
 	public void playSound(string clip){
 
@@ -71,4 +79,25 @@ public class Sounds : MonoBehaviour {
 			break;
 		}
 	}
+	/*************/
+
+	/**BASE MUSIC**/
+
+	public void changeBaseClip(string clip){
+		switch (clip){
+		case "Base_1":
+			mainAudio.clip = baseClips[0];
+			mainAudio.Play();
+			break;
+		case "Boss":
+			mainAudio.clip = baseClips[1];
+			mainAudio.Play();
+			break;
+		default:
+			Debug.Log ("No se encuentra sonido para \"" + clip + "\"");
+			break;
+		}
+	}
+
+	/**************/
 }

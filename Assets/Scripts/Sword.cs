@@ -6,7 +6,7 @@ public class Sword : MonoBehaviour {
 	private float smoothValor = 1f;
 
 	void Start(){
-		Invoke ("destroySword", 1.5f);
+		Invoke ("destroySword", 1f);
 	}
 
 	private void destroySword(){

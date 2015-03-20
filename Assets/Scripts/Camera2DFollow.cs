@@ -36,8 +36,9 @@ using UnityEngine;
 			if (inBoss)
 				return;
 			
-			if (target == null)
-				target = GameObject.FindWithTag("Player").transform;
+			if (target == null) {
+				target = GameObject.FindWithTag ("Player").transform;
+			}
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - lastTargetPosition).x;
 

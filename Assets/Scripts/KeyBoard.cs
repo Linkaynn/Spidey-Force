@@ -3,26 +3,42 @@ using System.Collections;
 
 public class KeyBoard : MonoBehaviour {
 
-	public static GameController instance = null;
+	public GameController gameController = null;
 
+	public Sounds sound;
+
+	public new Camera2DFollow camera;
+
+
+	void Awake(){
+		gameController = GameController.instance;		
+		sound = Sounds.instance;
+		camera = Camera2DFollow.instance;
+	}
 
 	void Start(){
-		instance = GameController.instance;		
+		gameController = GameController.instance;		
+		sound = Sounds.instance;
+		camera = Camera2DFollow.instance;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey(KeyCode.Q))
 			Application.Quit();
-		
+
+		camera = Camera2DFollow.instance;
+
 		if (Input.GetKey (KeyCode.R)) {
-			instance.level = -1;
-			instance.changeLevel();
-			instance.nlifes = 3;
-			for (int i = 0; i < instance.lifes.Length; i++){
-				instance.lifes[i].enabled = true;
+			sound.changeBaseClip("Base_1");
+			camera.finishBoss();
+			gameController.level = -1;
+			gameController.changeLevel();
+			gameController.nlifes = 3;
+			for (int i = 0; i < gameController.lifes.Length; i++){
+				gameController.lifes[i].enabled = true;
 			}
-			instance.score = 0;
+			gameController.score = 0;
 		}
 	}
 }

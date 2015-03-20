@@ -3,17 +3,21 @@ using System.Collections;
 
 public class GameController : MonoBehaviour {
 
-	private GameObject scoreGUI; //Texto con la puntuación
-    public int score; //Puntuación (Monedas)
+	public int score; //Number of the score (Coins)
+	private GameObject scoreGUI; //Gui of score
+    
+	public int nSwords; //Number of swords that pj have
+	public GUITexture[] swords = new GUITexture[5]; //Gui of the swords
 
-	public int nSwords;
-	public GUITexture[] swords = new GUITexture[5];
-
-    public int nlifes = 3; //Número de vidas iniciales del jugador 
-	public GUITexture[] lifes = new GUITexture[3]; //Texturas para representar las vidas del jugador
+    public int nlifes = 3; //Number of initial lifes 
+	public GUITexture[] lifes = new GUITexture[3]; //Gui of the lifes
 
     public static GameController instance = null;
     public int level;
+
+	public int getScore(){
+		return score;
+	}
 
     void Awake(){
         if (instance == null)
@@ -30,7 +34,6 @@ public class GameController : MonoBehaviour {
     {
         score = 0;
         scoreGUI = GameObject.FindWithTag("Score"); 
-
 
 
         lifes = GameObject.FindWithTag("GuiLife").GetComponentsInChildren<GUITexture>();
@@ -51,6 +54,7 @@ public class GameController : MonoBehaviour {
         scoreGUI.guiText.text = " " + score;
 	}
 
+	//Controller of change lifes (True: +1, False: -1)
     public void changeLifes(bool a)
     {
         if (nlifes == 0)
@@ -68,6 +72,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
+	//Controller of change swords (True: +1, False: -1)
 	public void changeSwords(bool a)
 	{
 		if (nSwords == 0)
@@ -84,15 +89,11 @@ public class GameController : MonoBehaviour {
 			nSwords--;
 		}
 	}
-	
+
+	//Controller of change levels
 	public void changeLevel()
 	{
-		//print("Cargando Level1");
 		level++;
 		Application.LoadLevel(level);
     }
-
-	public int getScore(){
-		return score;
-	}
 }
