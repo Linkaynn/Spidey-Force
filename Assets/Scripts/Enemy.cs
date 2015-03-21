@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
 	public bool isJumping;
 	public bool playerNear;
 
+    private Sounds sound;
+
 	void Start(){
 
 		groundCheckers = GetComponentsInChildren<Transform> ();
@@ -49,10 +51,14 @@ public class Enemy : MonoBehaviour
 
 		originalSpeed = speed;
 
+        sound = Sounds.instance;
+
 	}
 
     void FixedUpdate()
     {
+        sound = Sounds.instance;
+
         if (lifes <= 0)
             Destroy(this.gameObject);
 
@@ -124,7 +130,13 @@ public class Enemy : MonoBehaviour
 		if (other.gameObject.tag == "Player") {
 			isJumping = true;
 			rigidbody2D.AddForce (new Vector2 (0, 50));
-		
-		}
+
+        }
+        else if (other.gameObject.tag == "Weapon")
+        {
+            sound.playSound("swordh");
+            lifes -= 2;
+            Destroy(other.gameObject);
+        }
 	}
 }

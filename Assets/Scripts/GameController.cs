@@ -23,7 +23,9 @@ public class GameController : MonoBehaviour {
 
     void Awake(){
         if (instance == null)
+        {
             instance = this;
+        }
         else if (instance != this)
             Destroy(gameObject);
 
@@ -62,6 +64,9 @@ public class GameController : MonoBehaviour {
         if (nlifes == 0)
             return;
 
+        if (nlifes == 3 && a)
+            return;
+
         if (a)
         {
             lifes[nlifes].enabled = a;
@@ -93,6 +98,35 @@ public class GameController : MonoBehaviour {
 	public void changeLevel()
 	{
 		level++;
+        if (level > 0)
+            save();
 		Application.LoadLevel(level);
+    }
+
+    //Set the level
+    public void setLevel(int level)
+    {
+        Application.LoadLevel(level);
+    }
+
+    private void save()
+    {
+        Chronometer chronometer = GameObject.FindWithTag("Chronometer").GetComponent<Chronometer>();
+        int[] timeVariables = chronometer.getVariables();
+        PlayerPrefs.SetInt("Segundos", timeVariables[0]);
+        PlayerPrefs.SetInt("Minutos", timeVariables[1]);
+        PlayerPrefs.SetInt("Lifes", nlifes);
+        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("Swords", nSwords);
+        PlayerPrefs.SetInt("Score", score);
+
+        int aux;
+
+        if (playerOnBoss)
+            aux = 1;
+        else
+            aux = 0;
+
+        PlayerPrefs.SetInt("InBoss", aux);
     }
 }

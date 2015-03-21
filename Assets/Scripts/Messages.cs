@@ -16,6 +16,9 @@ public class Messages : MonoBehaviour {
 	private int lAfter, lBefore;
 	private bool life;
 
+    private int leAfter, leBefore;
+    private bool level;
+
 	// Use this for initialization
 	void Start () {
 		gameController = GameController.instance;
@@ -33,6 +36,11 @@ public class Messages : MonoBehaviour {
 
 		moveUp ();
 
+        leBefore = gameController.level;
+
+        if (leAfter != leBefore)
+            level = true;
+
 		sBefore = gameController.getScore();
 
 		if (sAfter != sBefore)
@@ -43,7 +51,7 @@ public class Messages : MonoBehaviour {
 		if (lAfter != lBefore)
 			life = true;
 
-		if (sAfter != sBefore || lAfter != lBefore) {
+		if (sAfter != sBefore || lAfter != lBefore || leAfter != leBefore) {
 			float random = Random.Range(0.01f,0.1f);
 
 			if (scoreUp){
@@ -53,7 +61,8 @@ public class Messages : MonoBehaviour {
 				scoreUp = false;
 			}
 
-			if (life){
+			if (life)
+            {
 				if (lBefore - lAfter < 0)
 					message.guiText.text = "" + (lBefore - lAfter);
 				else
@@ -62,6 +71,14 @@ public class Messages : MonoBehaviour {
 				lAfter = lBefore;
 				life = false;
 			}
+
+            if (level)
+            {
+                message.guiText.text = "¡Checkpoint!";
+                message.guiText.color = Color.green;
+                leAfter = leBefore;
+                level = false;
+            }
 
 			GameObject aux = Instantiate(message, new Vector3(0.48f + random, 0.62f + random, 0f), this.transform.rotation) as GameObject;
 

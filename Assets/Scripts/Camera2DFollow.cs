@@ -17,6 +17,8 @@ using UnityEngine;
         private Vector3 lookAheadPos;
 
 
+        public Transform inCaseOfBoss;
+
         // Use this for initialization
         private void Start()
         {
@@ -30,11 +32,19 @@ using UnityEngine;
         // Update is called once per frame
         private void Update()
         {
-			if (gameController.playerOnBoss) {
-				setPosition();
-				return;
-			}
+            if (gameController.playerOnBoss)
+            {
+                if (inCaseOfBoss == null)
+                    inCaseOfBoss = GameObject.FindWithTag("BossCamera").transform;
+
+                setPosition();
+            }
+            else
+            {
+                target = GameObject.FindWithTag("Player").transform;
+            }
 			
+            
 			if (target == null) {
 				target = GameObject.FindWithTag ("Player").transform;
 			}
@@ -61,7 +71,7 @@ using UnityEngine;
         }
 
 		public void setPosition(){
-			transform.position = StartBoss.getPosition();
+            target = inCaseOfBoss;
 		}
 
     }

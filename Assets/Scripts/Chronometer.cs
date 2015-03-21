@@ -5,9 +5,11 @@ public class Chronometer : MonoBehaviour {
 
     private float time;
 
-    private float miliseconds;
-    private int seconds;
-    private int minutes;
+    private float miliseconds = 0f;
+    private int seconds = 0;
+    private int minutes = 0;
+
+    public static int[] variables = new int[2];
 
     private GameController gameController;
 
@@ -21,6 +23,9 @@ public class Chronometer : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        variables[0] = seconds;
+        variables[1] = minutes;
 
     }
 
@@ -59,6 +64,19 @@ public class Chronometer : MonoBehaviour {
 
             gameObject.guiText.text = "" + minutes + ":" + seconds + ":" + miliseconds;
         }
-
 	}
+
+    public int[] getVariables()
+    {
+        int[] aux = new int[2];
+        aux[0] = seconds;
+        aux[1] = minutes;
+        return aux;
+    }
+
+    public void setVariables(int minutes, int seconds)
+    {
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
 }

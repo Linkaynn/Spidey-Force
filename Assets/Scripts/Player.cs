@@ -22,7 +22,11 @@ public class Player : MonoBehaviour
 	/*SPAWN THINGS*/
 	public GameObject[] pickups = new GameObject[2]; 
 	public GameObject sword;
-	public ParticleSystem particles;
+	public GameObject[] particles;
+    /*PARTICLES
+     * 0: Enemy Death particles
+     * 1: Player jum particles
+     */
 	/*************/
 
 	private Sounds sound;
@@ -77,7 +81,19 @@ public class Player : MonoBehaviour
             animator.SetTrigger("isJumping");
             rigidbody2D.AddForce(new Vector2(0, force));  
 			sound.playSound("jump");
+            Vector3 location = transform.position + new Vector3(0, -0.75f);
+            instantiateParticles(particles[1], location);
 
+        }
+
+        /***SPRINT***/
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)){
+            if (transform.rotation.y == 0)
+                rigidbody2D.AddForce(new Vector2(300,0));
+            else
+                rigidbody2D.AddForce(new Vector2(-300,0));
+            sound.playSound("shift");
         }
 
 		/***ESPADA***/
@@ -153,20 +169,20 @@ public class Player : MonoBehaviour
 
     /***ENEMIGOS***/
     void OnCollisionEnter2D(Collision2D other)
-    {       
+    {
+
         if (other.gameObject.tag == "Enemy"){
+
+            Vector2 vFinal = calculateVFinal(other);
 
             Enemy o = other.gameObject.GetComponent<Enemy>();
             
             if (other.gameObject.name == "RedEnemy")
                 o.ChangeDirection();
 
-			// Physic calculation of the relative velocity of the hitter against the hitted (Do not touch!)
-            Vector2 vFinal = other.rigidbody.mass * other.relativeVelocity / (rigidbody2D.mass + other.rigidbody.mass);
-
             if (vFinal.y < -3){
 
-				instantiateParticles(particles, other);
+				instantiateParticles(particles[0], other.transform.position);
 
                 o.lifes--;
 
@@ -185,14 +201,28 @@ public class Player : MonoBehaviour
                 CheckIfGameOver();
 				sound.playSound("hit");
             }
-        }   
+        }
+        else if (other.gameObject.tag == "Boss")
+        {
+            Vector2 vFinal = calculateVFinal(other);
+            if (vFinal.y > -3)
+            {
+                gameController.changeLifes(false);
+                CheckIfGameOver();
+            }
+        }
+    }
+
+    private Vector2 calculateVFinal(Collision2D other)
+    {
+        // Physic calculation of the relative velocity of the hitter against the hitted (Do not touch!)
+        return (other.rigidbody.mass * other.relativeVelocity / (rigidbody2D.mass + other.rigidbody.mass));
     }
 
 	/* PICKUPS
 	 * 0: Life
 	 * 1: Sword
 	 */
-
 	private void instantiatePickup(Collision2D other){
 		int numero = Random.Range(0, 101);
 		
@@ -204,8 +234,8 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	private void instantiateParticles(ParticleSystem particles, Collision2D other){
-		Instantiate (particles, other.transform.position, new Quaternion(0,1356,0,0));
+	private void instantiateParticles(GameObject particles, Vector3 other){
+		Instantiate (particles, other, new Quaternion(0,1356,0,0));
 	}
 
     void CheckIfGameOver()

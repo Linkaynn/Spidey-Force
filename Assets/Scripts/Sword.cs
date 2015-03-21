@@ -18,24 +18,15 @@ public class Sword : MonoBehaviour {
 
 	void Update(){
 
+        sound = Sounds.instance;
+
 		smoothValor = smoothValor * 1.1f;
 		transform.Rotate (0f, 0f, -smoothValor);
 	}
 
 	void OnCollisionEnter2D (Collision2D other){
-		if (other.gameObject.tag == "Enemy") {
-
-            Enemy o = other.gameObject.GetComponent<Enemy>();
-
-            if (other.gameObject.name == "RedEnemy")
-                o.ChangeDirection();
-
-            o.lifes -= 2;
-
-            sound.playSound("swordh");
-
-            Destroy(this.gameObject);
-		} else if (other.gameObject.tag != "Weapon") {
+        if (other.gameObject.tag == "Untagged")
+        {
             sound.playSound("swordnh");
             gameObject.SetActive(false);
             Invoke("destroySword", 1f);

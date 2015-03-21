@@ -22,6 +22,7 @@ public class Sounds : MonoBehaviour {
 	 * 6: Take sword (sword)
      * 7: Sword hit (swordh)
      * 8: Sword no hit (swordnh)
+     * 9: Shift force (shift)
 	 */
 
 	// Use this for initialization
@@ -89,6 +90,10 @@ public class Sounds : MonoBehaviour {
             audioSource.clip = clips[8];
             audioSource.Play();
             break;
+        case "shift":
+            audioSource.clip = clips[9];
+            audioSource.Play();
+            break;
 		default:
 			Debug.Log ("No se encuentra sonido para \"" + clip + "\"");
 			break;
@@ -115,4 +120,14 @@ public class Sounds : MonoBehaviour {
 	}
 
 	/**************/
+
+    public void stopMusic()
+    {
+        mainAudio.Pause();
+    }
+
+    public void playMusic()
+    {
+        mainAudio.Play();
+    }
 }
