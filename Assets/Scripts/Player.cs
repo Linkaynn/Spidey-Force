@@ -3,24 +3,30 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 1.0f; //velocidad del jugador
-    public float force = 100f; //fuerza del salto
-    public bool onGround = true; //Determina si el jugador está en el suelo para evitar que salte en el aire
-    public Transform checkGround; 
+	/*MOVING*/
+    public float speed = 1.0f; //Player velocity
+    public float force; //Jump force
+	private RaycastHit hit; 
+	private Vector3 move;
+	private Animator animator;
+	public float moveTime = 0.1f;
+	/*******/
+
+	/*JUMPING VARIABLES*/
+    public bool onGround = true; //Means if the player is on ground or not
+    public Transform checkGround;  //Object about the script will check if is on ground or not
     public float checkRadius = 0.07f;
 	public LayerMask groundMask; //Capa del suelo para saber sobre qué queremos saltar
+	/******************/
 
-	public GameObject[] pickups = new GameObject[2];
+	/*SPAWN THINGS*/
+	public GameObject[] pickups = new GameObject[2]; 
 	public GameObject sword;
 	public ParticleSystem particles;
+	/*************/
 
 	private Sounds sound;
 
-    private RaycastHit hit; 
-    private Vector3 move;
-    
-    private Animator animator;
-    public float moveTime = 0.1f;
     private GameController gameController;
 
     void Start()
@@ -35,6 +41,7 @@ public class Player : MonoBehaviour
     {
         if (gameController.nlifes == 0)
             return;
+
         /***MOVIMIENTO***/
         move = new Vector2(Input.GetAxis("Horizontal"), 0);
         Vector3 newPosition = transform.position + (move * speed * Time.deltaTime);
@@ -75,7 +82,7 @@ public class Player : MonoBehaviour
 
 		/***ESPADA***/
 
-		if (Input.GetKeyDown (KeyCode.E) && gameController.nSwords > 0) {
+		if (Input.GetKeyUp (KeyCode.E) && gameController.nSwords > 0) {
 
 			GameObject gSword;
 			Quaternion actual = transform.rotation;
@@ -95,11 +102,13 @@ public class Player : MonoBehaviour
 		}
 
 		/***CAIDA***/
-		if (rigidbody2D.velocity.y < -18.5) {
-			gameController.changeLifes(false);
-			rigidbody2D.AddForce(new Vector2(0, force));
-			CheckIfGameOver();
-			sound.playSound("hit");
+		if (!gameController.playerOnBoss) {
+			if (rigidbody2D.velocity.y < -18.5) {
+				gameController.changeLifes(false);
+				rigidbody2D.AddForce(new Vector2(0, force));
+				CheckIfGameOver();
+				sound.playSound("hit");
+			}
 		}
     }
 
@@ -125,12 +134,15 @@ public class Player : MonoBehaviour
             }
 
 			sound.playSound("life");
+		/***ESPADA***/
         } else if (other.gameObject.tag == "Sword"){
 			Destroy(other.gameObject);
 
 			if (gameController.nSwords < 5){
 				gameController.changeSwords(true);
 			}
+
+			sound.playSound("sword");
 		}
         /***PUERTA***/
         else if (other.gameObject.tag == "Door")
@@ -144,28 +156,31 @@ public class Player : MonoBehaviour
     {       
         if (other.gameObject.tag == "Enemy"){
 
+            Enemy o = other.gameObject.GetComponent<Enemy>();
+            
+            if (other.gameObject.name == "RedEnemy")
+                o.ChangeDirection();
+
 			// Physic calculation of the relative velocity of the hitter against the hitted (Do not touch!)
             Vector2 vFinal = other.rigidbody.mass * other.relativeVelocity / (rigidbody2D.mass + other.rigidbody.mass);
 
-            if (vFinal.y < -0.5){
+            if (vFinal.y < -3){
 
-				instantiatePickup(other);
 				instantiateParticles(particles, other);
 
-                Destroy(other.gameObject);
+                o.lifes--;
 
-				giveScoreForKill(other);
+                if (o.lifes <= 0)
+                {
+                    gameController.score += (int)o.score;
+                    instantiatePickup(other);
+                }
 
                 rigidbody2D.AddForce(new Vector2(0, -vFinal.y * 100));
 
 				sound.playSound("enemiedie");
             }
             else{
-
-				if (other.gameObject.name != "RedEnemy"){
-	                Enemy o = other.gameObject.GetComponent<Enemy>();
-	                o.ChangeDirection();
-				}
                 gameController.changeLifes(false);
                 CheckIfGameOver();
 				sound.playSound("hit");
@@ -191,19 +206,6 @@ public class Player : MonoBehaviour
 
 	private void instantiateParticles(ParticleSystem particles, Collision2D other){
 		Instantiate (particles, other.transform.position, new Quaternion(0,1356,0,0));
-	}
-
-	private void giveScoreForKill(Collision2D other){
-		switch (other.gameObject.name) {
-		case "RedEnemy":
-			gameController.score += 25;
-			break;
-		case "GreenEnemy":
-			gameController.score += 15;
-			break;
-		default:
-			break;
-		}
 	}
 
     void CheckIfGameOver()

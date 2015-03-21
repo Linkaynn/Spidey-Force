@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
     public static GameController instance = null;
     public int level;
 
+	public bool playerOnBoss = false;
+
 	public int getScore(){
 		return score;
 	}
@@ -75,9 +77,6 @@ public class GameController : MonoBehaviour {
 	//Controller of change swords (True: +1, False: -1)
 	public void changeSwords(bool a)
 	{
-		if (nSwords == 0)
-			return;
-		
 		if (a)
 		{
 			swords[nSwords].enabled = a;

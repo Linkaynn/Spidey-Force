@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SpawnPickups : MonoBehaviour {
 
+    private GameController gameController;
+
 	private float random;
 
 	public GameObject[] pickups = new GameObject[2];
@@ -13,11 +15,12 @@ public class SpawnPickups : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		random = 0;
+        gameController = GameController.instance;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Boss_1.playerOn)
+		if (gameController.playerOnBoss)
 		{
 			if (random <= 0)
 				random = Random.Range(3,8);

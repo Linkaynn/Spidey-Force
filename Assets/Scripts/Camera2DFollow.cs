@@ -3,8 +3,7 @@ using UnityEngine;
     public class Camera2DFollow : MonoBehaviour
     {
 
-
-		public static Camera2DFollow instance = null;
+		private GameController gameController;
 
         public Transform target;
         public float damping = 1;
@@ -17,7 +16,6 @@ using UnityEngine;
         private Vector3 currentVelocity;
         private Vector3 lookAheadPos;
 
-		private bool inBoss = false;
 
         // Use this for initialization
         private void Start()
@@ -26,15 +24,16 @@ using UnityEngine;
             offsetZ = (transform.position - target.position).z;
             transform.parent = null;
 			target = GameObject.FindWithTag("Player").transform;
-			if (instance == null)
-				instance = this;
+			gameController = GameController.instance;
         }
 
         // Update is called once per frame
         private void Update()
         {
-			if (inBoss)
+			if (gameController.playerOnBoss) {
+				setPosition();
 				return;
+			}
 			
 			if (target == null) {
 				target = GameObject.FindWithTag ("Player").transform;
@@ -61,13 +60,8 @@ using UnityEngine;
             lastTargetPosition = target.position;
         }
 
-		public void positionation(Vector2 position){
-			transform.position = position;
-			inBoss = true;
-		}
-
-		public void finishBoss(){
-			inBoss = false;
+		public void setPosition(){
+			transform.position = StartBoss.getPosition();
 		}
 
     }

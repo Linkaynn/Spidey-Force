@@ -19,6 +19,9 @@ public class Sounds : MonoBehaviour {
 	 * 3: Enemy hit player (hit)
 	 * 4: Take Life (life)
 	 * 5: Throw knife (knife)
+	 * 6: Take sword (sword)
+     * 7: Sword hit (swordh)
+     * 8: Sword no hit (swordnh)
 	 */
 
 	// Use this for initialization
@@ -74,6 +77,18 @@ public class Sounds : MonoBehaviour {
 			audioSource.clip = clips[5];
 			audioSource.Play();
 			break;
+		case "sword":
+			audioSource.clip = clips[6];
+			audioSource.Play();
+			break;
+        case "swordh":
+            audioSource.clip = clips[7];
+            audioSource.Play();
+            break;
+        case "swordnh":
+            audioSource.clip = clips[8];
+            audioSource.Play();
+            break;
 		default:
 			Debug.Log ("No se encuentra sonido para \"" + clip + "\"");
 			break;

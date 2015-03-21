@@ -5,17 +5,27 @@ public class StartBoss : MonoBehaviour {
 	
 	private Collider2D[] colliders;
 
-	private new Camera2DFollow camera;
+	private GameController gameController;
 	private Sounds sound;
 
-	public Vector2 positionOfCamera;
+	public Vector2 position;
+
+	public static Vector2 positionOfCamera;
 
 	void Start(){
 		colliders = this.gameObject.GetComponentsInChildren<Collider2D>();
 
-		camera = Camera2DFollow.instance;
+		gameController = GameController.instance;
 
 		sound = Sounds.instance;
+
+		positionOfCamera = position;
+	}
+
+	void Update(){
+		if (!gameController.playerOnBoss && Boss_1.lifes <= 0) {
+			Destroy(this.gameObject);
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -23,12 +33,15 @@ public class StartBoss : MonoBehaviour {
 			for (int i = 1; i < colliders.Length; i++){
 				colliders[i].isTrigger = !colliders[i].isTrigger;
 			}
-			camera.positionation(positionOfCamera);
 			Destroy(this.gameObject.collider2D);
 
 			sound.changeBaseClip("Boss");
 
-			Boss_1.playerOn = true;
+			gameController.playerOnBoss = true;
 		}
+	}
+
+	public static Vector2 getPosition(){
+		return positionOfCamera;
 	}
 }

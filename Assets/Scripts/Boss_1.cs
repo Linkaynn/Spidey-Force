@@ -3,33 +3,40 @@ using System.Collections;
 
 public class Boss_1 : MonoBehaviour {
 
-	public static bool playerOn = false;
+	private GameController gameController; //Interface of the controller of all the game
+	private Sounds sound; //Interface of sound
+	private new Camera2DFollow camera; //Interface of camera
 
-	private Sounds sound;
+	private float random = 0f; //Random number for jumping
 
-	private new Camera2DFollow camera;
+	public GUIText bossLifes;
 
-	private float random = 0f;
 
+	/**Variables of moving**/
 	private Vector3 move;
 	public float speed;
 	public float originalSpeed;
 	private int n = -1;
 	private float alpha = 0;
+	/**********************/
 
-	private float lifes;
+	public static float lifes; // Life of the boss
 
 	// Use this for initialization
 	void Start () {
+		gameController = GameController.instance;
 		sound = Sounds.instance;
-		camera = Camera2DFollow.instance;
-		lifes = 0.25f;
+		lifes = 10;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		if (playerOn) {
+		if (gameController.playerOnBoss) {
+
+			bossLifes.gameObject.SetActive(true);
+
+			bossLifes.text = "" + lifes;
 
 			if (random <= 0)
 				random = Random.Range(1,4);
@@ -46,16 +53,17 @@ public class Boss_1 : MonoBehaviour {
 				checkIfJump();
 
 			if (lifes <= 0){
+				bossLifes.gameObject.SetActive(false);
 				sound.changeBaseClip("Base_1");
-				playerOn = false;
+				gameController.playerOnBoss = false;
+				gameController.score += 500;
 				Destroy (this.gameObject);
-				camera.finishBoss();
 			}
 		}
 	
 	}
 
-	public void ChangeDirection()
+	private void ChangeDirection()
 	{
 		n *= -1;
 		alpha = (alpha == 180) ? 0 : 180;
@@ -71,7 +79,14 @@ public class Boss_1 : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D other){
-		ChangeDirection ();
+
+
+		if (other.gameObject.tag == "Weapon") 
+		{
+			lifes -= 0.25f;
+		} else
+			ChangeDirection ();
+
 		if (other.gameObject.tag == "Player") 
 		{
 			// Physic calculation of the relative velocity of the hitter against the hitted (Do not touch!)
@@ -86,9 +101,6 @@ public class Boss_1 : MonoBehaviour {
 			other.gameObject.rigidbody2D.AddForce(new Vector2(0, 800));
 		}
 
-		if (other.gameObject.tag == "Weapon") 
-		{
-			lifes -= 0.25f;
-		}
+
 	}
 }

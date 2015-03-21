@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     private int n = 1;
     private float alpha = 0;
 
+    public float score;
+    public int lifes;
+
 	private Transform[] groundCheckers;
 	public bool[] booleans;
 	/* Checkers position
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour
 	public bool playerNear;
 
 	void Start(){
+
 		groundCheckers = GetComponentsInChildren<Transform> ();
 		booleans = new bool[6];
 
@@ -44,10 +48,13 @@ public class Enemy : MonoBehaviour
 			speed = 2;
 
 		originalSpeed = speed;
+
 	}
 
     void FixedUpdate()
     {
+        if (lifes <= 0)
+            Destroy(this.gameObject);
 
         move = new Vector3(n, 0, 0);
 
@@ -55,9 +62,8 @@ public class Enemy : MonoBehaviour
 
 		transform.rotation = new Quaternion (0, alpha, 0, 0);
 
-		checkEnemyNear ();
-
 		if (!isJumping) {
+            checkEnemyNear();
 			checking ();
 		}
 
@@ -88,7 +94,7 @@ public class Enemy : MonoBehaviour
 		}
 
 		if ((booleans[3] == true && booleans[2] == false) || playerNear) {
-			rigidbody2D.AddForce (new Vector2 (0, 150));  
+			rigidbody2D.AddForce (new Vector2 (0, 300));  
 			isJumping = true;
 			playerNear = false;
 			booleans[3] = false;
@@ -112,7 +118,7 @@ public class Enemy : MonoBehaviour
         transform.rotation = new Quaternion(0, alpha, 0, 0);
     }
 
-	void OnCollisionStay2D(Collision2D other){
+	void OnCollisionEnter2D(Collision2D other){
 		isJumping = false;
 		speed = originalSpeed;
 		if (other.gameObject.tag == "Player") {

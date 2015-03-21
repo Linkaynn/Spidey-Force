@@ -5,21 +5,17 @@ public class KeyBoard : MonoBehaviour {
 
 	public GameController gameController = null;
 
-	public Sounds sound;
-
-	public new Camera2DFollow camera;
+	public Sounds sound = null;
 
 
 	void Awake(){
 		gameController = GameController.instance;		
 		sound = Sounds.instance;
-		camera = Camera2DFollow.instance;
 	}
 
 	void Start(){
 		gameController = GameController.instance;		
 		sound = Sounds.instance;
-		camera = Camera2DFollow.instance;
 	}
 
 	// Update is called once per frame
@@ -27,16 +23,19 @@ public class KeyBoard : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Q))
 			Application.Quit();
 
-		camera = Camera2DFollow.instance;
+        sound = Sounds.instance;
 
 		if (Input.GetKey (KeyCode.R)) {
 			sound.changeBaseClip("Base_1");
-			camera.finishBoss();
 			gameController.level = -1;
 			gameController.changeLevel();
 			gameController.nlifes = 3;
+			gameController.nSwords = 5;
 			for (int i = 0; i < gameController.lifes.Length; i++){
 				gameController.lifes[i].enabled = true;
+			}
+			for (int i = 0; i < gameController.swords.Length; i++){
+				gameController.swords[i].enabled = true;
 			}
 			gameController.score = 0;
 		}
