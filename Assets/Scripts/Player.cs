@@ -88,12 +88,15 @@ public class Player : MonoBehaviour
 
         /***SPRINT***/
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)){
+        if (Input.GetKeyDown(KeyCode.LeftShift) && PlayerPrefs.GetInt("Boss_1_Killed", 0) == 1)
+        {
             if (transform.rotation.y == 0)
                 rigidbody2D.AddForce(new Vector2(300,0));
             else
                 rigidbody2D.AddForce(new Vector2(-300,0));
             sound.playSound("shift");
+            Vector3 location = transform.position + new Vector3(0, -0.75f);
+            instantiateParticles(particles[1], location);
         }
 
 		/***ESPADA***/
@@ -131,6 +134,10 @@ public class Player : MonoBehaviour
     /***COLISIONES***/
     void OnTriggerEnter2D(Collider2D other)
     {
+
+        if (gameController.nlifes == 0)
+            return;
+
         /***MONEDAS***/
         if (other.gameObject.tag == "Coin")
         {
@@ -170,6 +177,9 @@ public class Player : MonoBehaviour
     /***ENEMIGOS***/
     void OnCollisionEnter2D(Collision2D other)
     {
+
+        if (gameController.nlifes == 0)
+            return;
 
         if (other.gameObject.tag == "Enemy"){
 

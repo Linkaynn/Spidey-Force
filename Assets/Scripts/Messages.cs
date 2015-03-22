@@ -28,6 +28,8 @@ public class Messages : MonoBehaviour {
 		sBefore = 0;
 		lAfter = 3;
 		lBefore = 3;
+        leAfter = 1;
+        leBefore = 1;
 	
 	}
 	

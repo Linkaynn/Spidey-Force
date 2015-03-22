@@ -36,12 +36,13 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+
         score = 0;
         scoreGUI = GameObject.FindWithTag("Score"); 
 
 
         lifes = GameObject.FindWithTag("GuiLife").GetComponentsInChildren<GUITexture>();
-        level = 0;
+        level = 1;
 
 		swords = GameObject.FindWithTag ("GuiSword").GetComponentsInChildren<GUITexture> ();
 		nSwords = 5;
@@ -50,6 +51,12 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+        if (PlayerPrefs.GetInt("isLoading", 0) == 1)
+        {
+            PlayerPrefs.SetInt("isLoading",0);
+            GameObject.FindWithTag("Player").GetComponent<KeyBoard>().load();
+        }
+
 		if (scoreGUI == null)
 			scoreGUI = GameObject.FindWithTag("Score");
 		scoreGUI.guiText.fontSize = 20;
@@ -98,7 +105,7 @@ public class GameController : MonoBehaviour {
 	public void changeLevel()
 	{
 		level++;
-        if (level > 0)
+        if (level > 1)
             save();
 		Application.LoadLevel(level);
     }

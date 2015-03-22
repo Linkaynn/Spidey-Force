@@ -40,7 +40,7 @@ public class KeyBoard : MonoBehaviour {
                 Chronometer chronometer = GameObject.FindWithTag("Chronometer").GetComponent<Chronometer>();
                 chronometer.setVariables(0,0);
                 sound.changeBaseClip("Base_1");
-                gameController.level = -1;
+                gameController.level = 0;
                 gameController.changeLevel();
                 gameController.nlifes = 3;
                 gameController.nSwords = 5;
@@ -56,49 +56,15 @@ public class KeyBoard : MonoBehaviour {
 
                 gameController.playerOnBoss = false;
             }
-            
+
+            GUILayout.Space(20f);
+
             if(GUILayout.Button("Load checkpoint"))
             {
-                Chronometer chronometer = GameObject.FindWithTag("Chronometer").GetComponent<Chronometer>();
-                chronometer.setVariables(PlayerPrefs.GetInt("Minutos", 0), PlayerPrefs.GetInt("Segundos", 0));
-                gameController.setLevel(PlayerPrefs.GetInt("Level", 0));
-
-                for (int i = 0; i < gameController.swords.Length; i++)
-                {
-                    gameController.swords[i].enabled = true;
-                }
-
-                gameController.nlifes = PlayerPrefs.GetInt("Lifes", 3);
-                for (int i = gameController.lifes.Length -1; i >= 0; i--)
-                {
-                    if (gameController.nlifes <= i)
-                        gameController.lifes[i].enabled = false;
-                    else
-                        gameController.lifes[i].enabled = true;
-                }
-
-                gameController.nSwords = PlayerPrefs.GetInt("Swords", 5);
-
-                for (int i = gameController.swords.Length - 1; i >= 0; i--)
-                {
-                    if (gameController.nSwords <= i)
-                        gameController.swords[i].enabled = false;
-                    else
-                        gameController.swords[i].enabled = true;
-                }
-
-                gameController.score = PlayerPrefs.GetInt("Score", 0);
-
-                sound.changeBaseClip("Base_1");
-
-                int aux = PlayerPrefs.GetInt("InBoss", 0); ;
-
-                if (aux == 1)
-                    gameController.playerOnBoss = true;
-                else
-                    gameController.playerOnBoss = false;
-
+                load();
             }
+
+            GUILayout.Space(20f);
 
             if (GUILayout.Button("Quit"))
             {
@@ -110,11 +76,53 @@ public class KeyBoard : MonoBehaviour {
         }
         else
         {
-            if (Time.timeScale == 0)
+            if (Time.timeScale == 0 && gameController.nlifes > 0)
             {
                 Time.timeScale = 1;
                 sound.playMusic();
             }
         }
+    }
+
+    public void load()
+    {
+        Chronometer chronometer = GameObject.FindWithTag("Chronometer").GetComponent<Chronometer>();
+        chronometer.setVariables(PlayerPrefs.GetInt("Minutos", 0), PlayerPrefs.GetInt("Segundos", 0));
+        gameController.setLevel(PlayerPrefs.GetInt("Level", 1));
+
+        for (int i = 0; i < gameController.swords.Length; i++)
+        {
+            gameController.swords[i].enabled = true;
+        }
+
+        gameController.nlifes = PlayerPrefs.GetInt("Lifes", 3);
+        for (int i = gameController.lifes.Length - 1; i >= 0; i--)
+        {
+            if (gameController.nlifes <= i)
+                gameController.lifes[i].enabled = false;
+            else
+                gameController.lifes[i].enabled = true;
+        }
+
+        gameController.nSwords = PlayerPrefs.GetInt("Swords", 5);
+
+        for (int i = gameController.swords.Length - 1; i >= 0; i--)
+        {
+            if (gameController.nSwords <= i)
+                gameController.swords[i].enabled = false;
+            else
+                gameController.swords[i].enabled = true;
+        }
+
+        gameController.score = PlayerPrefs.GetInt("Score", 0);
+
+        sound.changeBaseClip("Base_1");
+
+        int aux = PlayerPrefs.GetInt("InBoss", 0); ;
+
+        if (aux == 1)
+            gameController.playerOnBoss = true;
+        else
+            gameController.playerOnBoss = false;
     }
 }
