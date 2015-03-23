@@ -43,7 +43,7 @@ public class Messages : MonoBehaviour {
         if (leAfter != leBefore)
             level = true;
 
-		sBefore = gameController.getScore();
+		sBefore = gameController.score;
 
 		if (sAfter != sBefore)
 			scoreUp = true;

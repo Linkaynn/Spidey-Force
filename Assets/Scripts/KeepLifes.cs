@@ -15,4 +15,10 @@ public class KeepLifes : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 		
 	}
+
+    void Update()
+    {
+        if (PlayerPrefs.GetInt("End", 0) == 1)
+            Destroy(gameObject);
+    }
 }

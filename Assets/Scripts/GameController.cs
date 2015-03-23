@@ -17,14 +17,28 @@ public class GameController : MonoBehaviour {
 
 	public bool playerOnBoss = false;
 
-	public int getScore(){
-		return score;
-	}
+    public bool firstDialog = false;
+
+    private Chronometer chronometer;
+    public int[] timeVariables = new int[2];
+
+    //FOR DEBUG
+    public bool activateDelete = false;
+
+    private void deleteAll()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 
     void Awake(){
+
         if (instance == null)
         {
             instance = this;
+            if (PlayerPrefs.GetInt("firstGame", 0) == 0)
+            {
+                firstDialog = true;
+            }
         }
         else if (instance != this)
             Destroy(gameObject);
@@ -36,6 +50,8 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+
+        chronometer = GameObject.FindWithTag("Chronometer").GetComponent<Chronometer>();
 
         score = 0;
         scoreGUI = GameObject.FindWithTag("Score"); 
@@ -51,18 +67,29 @@ public class GameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+
+        timeVariables = chronometer.getVariables();
+
+        if (activateDelete)
+            deleteAll();
+
         if (PlayerPrefs.GetInt("isLoading", 0) == 1)
         {
             PlayerPrefs.SetInt("isLoading",0);
             GameObject.FindWithTag("Player").GetComponent<KeyBoard>().load();
         }
 
-		if (scoreGUI == null)
-			scoreGUI = GameObject.FindWithTag("Score");
-		scoreGUI.guiText.fontSize = 20;
-		scoreGUI.guiText.color = Color.black;
+        if (scoreGUI == null)
+        {
+            scoreGUI = GameObject.FindWithTag("Score");
+        }
+        else
+        {
+            scoreGUI.guiText.fontSize = 20;
+            scoreGUI.guiText.color = Color.black;
 
-        scoreGUI.guiText.text = " " + score;
+            scoreGUI.guiText.text = " " + score;
+        }
 	}
 
 	//Controller of change lifes (True: +1, False: -1)
@@ -111,7 +138,7 @@ public class GameController : MonoBehaviour {
     }
 
     //Set the level
-    public void setLevel(int level)
+    public void setLevel(string level)
     {
         Application.LoadLevel(level);
     }
@@ -126,6 +153,8 @@ public class GameController : MonoBehaviour {
         PlayerPrefs.SetInt("Level", level);
         PlayerPrefs.SetInt("Swords", nSwords);
         PlayerPrefs.SetInt("Score", score);
+        PlayerPrefs.SetInt("haveCheckpoint", 1);
+        PlayerPrefs.SetInt("firstGame", 1);
 
         int aux;
 

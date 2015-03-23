@@ -32,6 +32,9 @@ using UnityEngine;
         // Update is called once per frame
         private void Update()
         {
+            if (gameController.nlifes == 0)
+                return;
+
             if (gameController.playerOnBoss)
             {
                 if (inCaseOfBoss == null)
@@ -43,9 +46,10 @@ using UnityEngine;
             {
                 target = GameObject.FindWithTag("Player").transform;
             }
-			
-            
-			if (target == null) {
+
+
+            if (target == null)
+            {
 				target = GameObject.FindWithTag ("Player").transform;
 			}
             // only update lookahead pos if accelerating or changed direction

@@ -43,6 +43,9 @@ public class Chronometer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (PlayerPrefs.GetInt("End", 0) == 1)
+            Destroy(gameObject);
+
         if (gameController.nlifes > 0)
         {
             time += Time.deltaTime;

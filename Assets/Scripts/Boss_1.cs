@@ -75,7 +75,8 @@ public class Boss_1 : MonoBehaviour {
                 gameController.changeLifes(true);
                 gameController.changeLifes(true);
                 gameController.changeLifes(true);
-                PlayerPrefs.SetInt("Boss_1_Killed", 1);
+                PlayerPrefs.SetInt("Boss_Killed", PlayerPrefs.GetInt("Boss_Killed",0) + 1);
+                PlayerPrefs.SetInt("New_Skill", 1);
 				Destroy (this.gameObject);
 			}
 		}

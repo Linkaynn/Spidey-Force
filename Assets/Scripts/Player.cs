@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
 
 	/*JUMPING VARIABLES*/
     public bool onGround = true; //Means if the player is on ground or not
+    public bool doubleJump = false; //Means if the player have a second jump or not
+    float auxTime = 0; //Delay time to double jump
     public Transform checkGround;  //Object about the script will check if is on ground or not
     public float checkRadius = 0.07f;
 	public LayerMask groundMask; //Capa del suelo para saber sobre qué queremos saltar
@@ -33,6 +35,8 @@ public class Player : MonoBehaviour
 
     private GameController gameController;
 
+    private float timeToFinal = 1.5f;
+
     void Start()
     {
         gameController = GameController.instance;
@@ -44,7 +48,14 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         if (gameController.nlifes == 0)
+        {
+            sound.stopMusic();
+            PlayerPrefs.SetInt("End", 1);
+            timeToFinal -= Time.deltaTime;
+            if (timeToFinal <= 0)
+                gameController.setLevel("Final");
             return;
+        }
 
         /***MOVIMIENTO***/
         move = new Vector2(Input.GetAxis("Horizontal"), 0);
@@ -73,22 +84,45 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(objectForward, hit.normal);            
         }
 
+
         /***SALTO***/
+
         onGround = Physics2D.OverlapCircle(checkGround.position, checkRadius, groundMask);
+
+        if (onGround)
+            doubleJump = true;
 
         if (((Input.GetAxis("Vertical") > 0) || Input.GetKey(KeyCode.Space)) && onGround)
         {
+            auxTime = 0.5f;
             animator.SetTrigger("isJumping");
-            rigidbody2D.AddForce(new Vector2(0, force));  
+            rigidbody2D.AddForce(new Vector2(0, force));
 			sound.playSound("jump");
             Vector3 location = transform.position + new Vector3(0, -0.75f);
             instantiateParticles(particles[1], location);
 
         }
 
+        if (PlayerPrefs.GetInt("Boss_Killed", 0) >= 2)
+        {
+            if (!onGround)
+                auxTime -= Time.deltaTime;
+
+            if (((Input.GetAxis("Vertical") > 0) || Input.GetKey(KeyCode.Space)) && doubleJump && auxTime <= 0)
+            {
+                doubleJump = false;
+                animator.SetTrigger("isJumping");
+                rigidbody2D.AddForce(new Vector2(0, force));
+                sound.playSound("jump");
+                Vector3 location = transform.position + new Vector3(0, -0.75f);
+                instantiateParticles(particles[1], location);
+
+            }
+        }
+
         /***SPRINT***/
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && PlayerPrefs.GetInt("Boss_1_Killed", 0) == 1)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && PlayerPrefs.GetInt("Boss_Killed", 0) >= 1)
         {
             if (transform.rotation.y == 0)
                 rigidbody2D.AddForce(new Vector2(300,0));
@@ -122,7 +156,7 @@ public class Player : MonoBehaviour
 
 		/***CAIDA***/
 		if (!gameController.playerOnBoss) {
-			if (rigidbody2D.velocity.y < -18.5) {
+			if (rigidbody2D.velocity.y < -25) {
 				gameController.changeLifes(false);
 				rigidbody2D.AddForce(new Vector2(0, force));
 				CheckIfGameOver();
