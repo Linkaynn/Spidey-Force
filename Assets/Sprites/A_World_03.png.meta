@@ -1,0 +1,785 @@
+fileFormatVersion: 2
+guid: 1ac4d75f32ca06e45827a1954a9ffafd
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: A_World_03
+    21300002: A_World_03_0
+    21300004: A_World_03_1
+    21300006: A_World_03_2
+    21300008: A_World_03_3
+    21300010: A_World_03_4
+    21300012: A_World_03_5
+    21300014: A_World_03_6
+    21300016: A_World_03_7
+    21300018: A_World_03_8
+    21300020: A_World_03_9
+    21300022: A_World_03_10
+    21300024: A_World_03_11
+    21300026: A_World_03_12
+    21300028: A_World_03_13
+    21300030: A_World_03_14
+    21300032: A_World_03_15
+    21300034: A_World_03_16
+    21300036: A_World_03_17
+    21300038: A_World_03_18
+    21300040: A_World_03_19
+    21300042: A_World_03_20
+    21300044: A_World_03_21
+    21300046: A_World_03_22
+    21300048: A_World_03_23
+    21300050: A_World_03_24
+    21300052: A_World_03_25
+    21300054: A_World_03_26
+    21300056: A_World_03_27
+    21300058: A_World_03_28
+    21300060: A_World_03_29
+    21300062: A_World_03_30
+    21300064: A_World_03_31
+    21300066: A_World_03_32
+    21300068: A_World_03_33
+    21300070: A_World_03_34
+    21300072: A_World_03_35
+    21300074: A_World_03_36
+    21300076: A_World_03_37
+    21300078: A_World_03_38
+    21300080: A_World_03_39
+    21300082: A_World_03_40
+    21300084: A_World_03_41
+    21300086: A_World_03_42
+    21300088: A_World_03_43
+    21300090: A_World_03_44
+    21300092: A_World_03_45
+    21300094: A_World_03_46
+    21300096: A_World_03_47
+    21300098: A_World_03_48
+    21300100: A_World_03_49
+    21300102: A_World_03_50
+    21300104: A_World_03_51
+    21300106: A_World_03_52
+    21300108: A_World_03_53
+    21300110: A_World_03_54
+    21300112: A_World_03_55
+    21300114: A_World_03_56
+    21300116: A_World_03_57
+    21300118: A_World_03_58
+    21300120: A_World_03_59
+    21300122: A_World_03_60
+    21300124: A_World_03_61
+    21300126: A_World_03_62
+    21300128: A_World_03_63
+    21300130: A_World_03_64
+    21300132: A_World_03_65
+    21300134: A_World_03_66
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: A_World_03_0
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 1399
+        width: 116
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_1
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 1399
+        width: 128
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_2
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 1399
+        width: 130
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_3
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1469
+        width: 76
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_4
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 1347
+        width: 68
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_5
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 1345
+        width: 82
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_6
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 1399
+        width: 84
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_7
+      rect:
+        serializedVersion: 2
+        x: 1123
+        y: 1429
+        width: 174
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_8
+      rect:
+        serializedVersion: 2
+        x: 1369
+        y: 1295
+        width: 276
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_9
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 1343
+        width: 304
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_10
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 1409
+        width: 84
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_11
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 1405
+        width: 38
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_12
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 1317
+        width: 152
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_13
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1261
+        width: 144
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_14
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 1267
+        width: 44
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_15
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 1267
+        width: 70
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_16
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 1267
+        width: 70
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_17
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1351
+        width: 76
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_18
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 1337
+        width: 46
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_19
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1315
+        width: 70
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_20
+      rect:
+        serializedVersion: 2
+        x: 1115
+        y: 1237
+        width: 172
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_21
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 1259
+        width: 170
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_22
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1261
+        width: 162
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_23
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 1179
+        width: 138
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_24
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 1073
+        width: 236
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_25
+      rect:
+        serializedVersion: 2
+        x: 1827
+        y: 1171
+        width: 176
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_26
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1139
+        width: 144
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_27
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 1141
+        width: 140
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_28
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 1135
+        width: 144
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_29
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 979
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_30
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 979
+        width: 116
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_31
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 979
+        width: 128
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_32
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 1035
+        width: 94
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_33
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 809
+        width: 172
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_34
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 807
+        width: 186
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_35
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 877
+        width: 104
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_36
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 813
+        width: 178
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_37
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 889
+        width: 124
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_38
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 823
+        width: 142
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_39
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 815
+        width: 46
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_40
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 791
+        width: 110
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_41
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 591
+        width: 58
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_42
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 591
+        width: 84
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_43
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 593
+        width: 52
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_44
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 595
+        width: 82
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_45
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 593
+        width: 58
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_46
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 593
+        width: 84
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_47
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 601
+        width: 206
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_48
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 603
+        width: 226
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_49
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 439
+        width: 232
+        height: 318
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_50
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 361
+        width: 510
+        height: 404
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_51
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 459
+        width: 176
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_52
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 477
+        width: 432
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_53
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 463
+        width: 50
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_54
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 475
+        width: 172
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_55
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 71
+        width: 180
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_56
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 73
+        width: 372
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_57
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 247
+        width: 152
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_58
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 319
+        width: 176
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_59
+      rect:
+        serializedVersion: 2
+        x: 1767
+        y: 253
+        width: 240
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_60
+      rect:
+        serializedVersion: 2
+        x: 737
+        y: 109
+        width: 138
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_61
+      rect:
+        serializedVersion: 2
+        x: 1803
+        y: 137
+        width: 82
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_62
+      rect:
+        serializedVersion: 2
+        x: 1889
+        y: 137
+        width: 82
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_63
+      rect:
+        serializedVersion: 2
+        x: 1819
+        y: 29
+        width: 66
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_64
+      rect:
+        serializedVersion: 2
+        x: 1891
+        y: 29
+        width: 68
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_65
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 1147
+        width: 136
+        height: 176
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: A_World_03_66
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 775
+        width: 439
+        height: 240
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
